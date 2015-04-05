@@ -1,5 +1,6 @@
-// Authenticate interfaces for Authatron.
 package authatron
+
+// Authenticate interfaces for Authatron.
 
 import (
 	"encoding/gob"

@@ -1,8 +1,8 @@
+package authatron
+
 // Configuration objects and functions for configuring Authatron
 // AuthConfig provides a parent config object housing configuration
 // for each supported authentication type.
-
-package authatron
 
 import (
 	"errors"

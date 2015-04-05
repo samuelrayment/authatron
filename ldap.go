@@ -1,6 +1,6 @@
-// LDAP authentication implementation for Authatron
-
 package authatron
+
+// LDAP authentication implementation for Authatron
 
 import (
 	"errors"
