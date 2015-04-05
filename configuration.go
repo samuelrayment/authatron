@@ -110,3 +110,25 @@ func UpdateConfigFromEnvironmentVariables(prefix string, config AuthConfig) Auth
 	config.loadEnv(prefix)
 	return config
 }
+
+// DefaultAuthConfig returns a default AuthConfig that enables dummy
+// authentication.
+func DefaultAuthConfig() AuthConfig {
+	return AuthConfig{
+		Type: "dummy",
+		UserStoreConfig: UserStoreConfig{
+			CookieSecret: "secret",
+		},
+		DummyAuthConfig: DummyAuthConfig{
+			DummyPassword: "password",
+		},
+		LDAPAuthConfig: LDAPAuthConfig{
+			Host:                 "",
+			Port:                 389,
+			BindDN:               "",
+			BindPassword:         "",
+			BaseDN:               "",
+			UserNameLookupFilter: "",
+		},
+	}
+}
