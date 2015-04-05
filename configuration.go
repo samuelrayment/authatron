@@ -42,10 +42,12 @@ func (ac *DummyAuthConfig) loadEnv(prefix string) {
 
 type UserStoreConfig struct {
 	CookieSecret string `toml:"cookie-secret"`
+	StoreName    string `toml:"store-name"`
 }
 
 func (usc *UserStoreConfig) loadEnv(prefix string) {
 	loadStringEnvIntoField(prefix, &usc.CookieSecret, "AUTH_COOKIE_SECRET")
+	loadStringEnvIntoField(prefix, &usc.StoreName, "AUTH_STORE_NAME")
 }
 
 // Configuration object for configuring Authatron.
@@ -68,8 +70,8 @@ func (ac *AuthConfig) loadEnv(prefix string) {
 // the provided config struct
 func NewAuthenticateServiceFromConfig(config *AuthConfig) (AuthenticateService, error) {
 	userStore := &cookieUserStore{
-		sessions.NewCookieStore([]byte("secret")),
-		config.CookieSecret,
+		sessions.NewCookieStore([]byte(config.CookieSecret)),
+		config.StoreName,
 	}
 	var authenticator Authenticator
 	switch config.Type {
@@ -118,6 +120,7 @@ func DefaultAuthConfig() AuthConfig {
 		Type: "dummy",
 		UserStoreConfig: UserStoreConfig{
 			CookieSecret: "secret",
+			StoreName:    "session-1",
 		},
 		DummyAuthConfig: DummyAuthConfig{
 			DummyPassword: "password",
