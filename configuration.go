@@ -106,7 +106,7 @@ func loadIntEnvIntoField(prefix string, field *uint16, envVar string) {
 // UpdateConfigFromEnvironmentVariables returns an updated config updated
 // loading in any environment variables.  Environment variables can be prefixed
 // using prefix allowing individual applications to namespace env vars
-func UpdateConfigFromEnvironmentVariables(prefix string, config *AuthConfig) *AuthConfig {
+func UpdateConfigFromEnvironmentVariables(prefix string, config AuthConfig) AuthConfig {
 	config.loadEnv(prefix)
 	return config
 }
